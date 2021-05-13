@@ -1,0 +1,24 @@
+{
+   "type": "postgres",
+   "host": "localhost",
+   "port": 5432,
+   "username": "postgres",
+   "password": "porquedeus",
+   "database": "friendmatch",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "src/models/entities/*.ts"
+   ],
+   "migrations": [
+      "src/database/migrations/**/*.ts"
+   ],
+   "subscribers": [
+      "src/subscriber/**/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "src/models/entities",
+      "migrationsDir": "src/migration",
+      "subscribersDir": "src/subscriber"
+   }
+}

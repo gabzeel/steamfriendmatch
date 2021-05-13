@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+      var token = prompt('Seu token');
+      var socket = io("localhost:3000", {
+        query: {
+          token
+        },
+      });
+
+      var messages = document.getElementById("messages");
+      var form = document.getElementById("form");
+      var input = document.getElementById("input");
+
+      socket.emit("sendMessage", {
+        userId: "9cb2b72d-a745-4901-b32c-d990753fc9d6",
+        message: "TESTEE",
+      });
+
+      socket.on("receiveMessage", (response) => {
+        alert("SDFSDFSD", response);
+      });
+    </script>
+  </body>
+</html>
