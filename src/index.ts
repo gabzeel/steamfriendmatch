@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from "express";
 import passport from "passport";
 import * as jwt from "jsonwebtoken";
@@ -16,10 +17,8 @@ import { createUser, getUsers } from "./controllers/users";
 import { login } from "./controllers/auth";
 import { ConnectedSocketUser, MessageObject } from "./models/interfaces";
 import { createPost, deletePost, getPostById, getPosts, updatePost } from "./controllers/post";
-
-const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "";
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "SecretTestKey";
 const PORT = process.env.SERVER_PORT || 3000;
-
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
