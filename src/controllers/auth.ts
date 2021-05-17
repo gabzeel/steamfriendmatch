@@ -9,6 +9,7 @@ const login = async (req: any, res: any) => {
   const user = await User.findOne({ email }, { select: ["password", "email", "id", "name", "profilePhotoFile"] });
 
   if (!user) {
+    res.status(401).send({ message: "Unauthorized" });
     return;
   }
 
