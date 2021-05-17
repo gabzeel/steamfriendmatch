@@ -16,8 +16,13 @@ const getPostById = async (req: any, res: any) => {
 };
 
 const createPost = async (req: any, res: any) => {
-    const { tittle, content } = req.body;
-    const user = req.user as User;
+    const { content, userId } = req.body;
+    const user = await User.findOne(userId);
+
+    if (!user) {
+      res.status(500).send({error: 'Error'});
+      return;
+    }
 
     const post = new Post();
 
@@ -25,12 +30,14 @@ const createPost = async (req: any, res: any) => {
     post.content = content;
     post.createdAt = new Date();
 
+    await post.save();
+
     res.send(post);
 };
 
 const updatePost = async (req: any, res: any) => {
   const { id } = req.params;
-  const { tittle, content } = req.body;
+  const { content } = req.body;
 
   const post = await Post.findOne(id);
 
@@ -39,6 +46,10 @@ const updatePost = async (req: any, res: any) => {
   }
 
   post.content = content;
+
+  await post.save();
+
+  res.send(post);
 };
 
 const deletePost = async (req: any, res: any) => {
