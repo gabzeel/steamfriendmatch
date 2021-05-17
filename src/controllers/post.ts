@@ -2,7 +2,7 @@ import Post from "../models/entities/Post";
 import User from "../models/entities/User";
 
 const getPosts = async (req: any, res: any) => {
-  const posts = await Post.find();
+  const posts = await Post.find({relations: ['user']});
 
   res.send(posts);
 };
@@ -21,6 +21,11 @@ const createPost = async (req: any, res: any) => {
 
     if (!user) {
       res.status(500).send({error: 'Error'});
+      return;
+    }
+
+    if ((content as string).length) {
+      res.status(400).send({error: 'Content cannot be empty'});
       return;
     }
 
