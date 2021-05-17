@@ -19,7 +19,7 @@ const createUser = async (req: any, res: any) => {
 
   await user.save();
 
-  return user;
+  res.send({...user});
 };
 
 const updateUser = async (req: any, res: any) => {
