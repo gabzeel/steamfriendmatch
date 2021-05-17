@@ -1,7 +1,4 @@
 import User from "../models/entities/User";
-import * as jwt from "jsonwebtoken";
-
-const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "";
 
 const getUsers = async (req: any, res: any) => {
   const users = await User.find();
@@ -22,9 +19,7 @@ const createUser = async (req: any, res: any) => {
 
   await user.save();
 
-  const jwtToken = jwt.sign({ user }, JWT_SECRET_KEY);
-
-  res.send({ token: jwtToken });
+  return user;
 };
 
 const updateUser = async (req: any, res: any) => {

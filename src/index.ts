@@ -18,7 +18,7 @@ import { login } from "./controllers/auth";
 import { ConnectedSocketUser, MessageObject } from "./models/interfaces";
 import { createPost, deletePost, getPostById, getPosts, updatePost } from "./controllers/post";
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "SecretTestKey";
-const PORT = process.env.SERVER_PORT || 3000;
+const PORT = Number(process.env.SERVER_PORT) || 3000;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -97,6 +97,6 @@ createConnection()
   })
   .catch((error) => console.log("TypeORM connection error: ", error));
 
-server.listen(PORT, () => {
+server.listen(PORT, "0.0.0.0",  () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 });

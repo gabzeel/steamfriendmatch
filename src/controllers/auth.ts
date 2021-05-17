@@ -1,7 +1,7 @@
 import * as jwt from "jsonwebtoken";
 import User from "../models/entities/User";
 
-const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "";
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "SecretTestKey";
 
 const login = async (req: any, res: any) => {
   const { email, password } = req.body;
