@@ -22,7 +22,6 @@ const createPost = async (req: any, res: any) => {
     const post = new Post();
 
     post.user = user;
-    post.tittle = tittle;
     post.content = content;
     post.createdAt = new Date();
 
@@ -39,7 +38,6 @@ const updatePost = async (req: any, res: any) => {
     return;
   }
 
-  post.tittle = tittle;
   post.content = content;
 };
 

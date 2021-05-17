@@ -7,9 +7,6 @@ class Post extends BaseEntity{
     id: string;
 
     @Column()
-    tittle: string;
-
-    @Column()
     content: string;
 
     @Column({type: "date"})

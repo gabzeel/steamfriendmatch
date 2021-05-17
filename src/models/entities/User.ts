@@ -11,6 +11,9 @@ class User extends BaseEntity {
   @Column()
   name: string;
 
+  @Column({nullable: true})
+  profilePhotoFile: string;
+
   @Column({ select: false })
   password: string;
 }

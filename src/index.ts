@@ -13,10 +13,13 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { createUser, getUsers } from "./controllers/users";
+import { createUser, getUsers, updateUser, uploadProfilePhoto } from "./controllers/users";
 import { login } from "./controllers/auth";
 import { ConnectedSocketUser, MessageObject } from "./models/interfaces";
 import { createPost, deletePost, getPostById, getPosts, updatePost } from "./controllers/post";
+import { getFile } from './controllers/files';
+import fileUpload from 'express-fileupload';
+
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "SecretTestKey";
 const PORT = Number(process.env.SERVER_PORT) || 3000;
 const app = express();
@@ -24,7 +27,9 @@ app.use(cors());
 app.use(bodyParser.json());
 const server = http.createServer(app);
 // const io = new Server(server, { cors: { origin: "*" } });
-
+app.use(fileUpload({
+  limits: { fileSize: 50 * 1024 * 1024 },
+}));
 const opts: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: JWT_SECRET_KEY,
@@ -86,12 +91,16 @@ createConnection()
     app.get("/users", getUsers);
     app.get("/users/:id", getUsers);
     app.post("/users", createUser);
+    app.post("/users/:id/profile", uploadProfilePhoto);
+    app.put("/users/:id", updateUser);
 
     app.get("/posts", getPosts);
     app.get("/posts/:id", getPostById);
     app.post("/posts", createPost);
     app.put("/posts/:id", updatePost);
     app.delete("/posts/:id", deletePost);
+
+    app.get("/files/:fileKey", getFile);
 
     app.post("/auth/login", login);
   })

@@ -6,9 +6,14 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "SecretTestKey";
 const login = async (req: any, res: any) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email }, { select: ["password"] });
-  if (user?.password === password) {
-    const jwtToken = jwt.sign({ user: { email } }, JWT_SECRET_KEY);
+  const user = await User.findOne({ email }, { select: ["password", "email", "id", "name", "profilePhotoFile"] });
+
+  if (!user) {
+    return;
+  }
+
+  if (user.password === password) {
+    const jwtToken = jwt.sign({ user: { email: user.email, id: user.id, name: user.name, photoKey: user.profilePhotoFile } }, JWT_SECRET_KEY);
     res.send({ token: jwtToken });
   } else {
     res.status(401).send({ message: "Unauthorized" });
