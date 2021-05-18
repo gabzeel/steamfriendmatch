@@ -9,15 +9,15 @@ An APP to find friends on steam
 
 `friendmatch`
 
-3.Inserir a senha do seu postgres alterar o arquivo "ormconfig.json" no campo password.
+3. Inserir a senha do seu postgres alterar o arquivo "ormconfig.json" no campo password.
 
-4.Copiar o arquivo ".env.example" e renomear como .env
+4. Copiar o arquivo ".env.example" e renomear como .env
 
-5.No terminal na pasta do Projeto executar o seguinte comando:
+5. No terminal na pasta do Projeto executar o seguinte comando:
 
 `npm install`
 
-6.Para iniciar o backend basta inserir o comando:
+6. Para iniciar o backend basta inserir o comando:
 
 `npm run start`
 
